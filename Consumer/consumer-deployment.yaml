@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: consumer
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: consumer
+  template:
+    metadata:
+      labels:
+        app: consumer
+    spec:
+      containers:
+      - name: producer
+        image: magradze/testrepo:consumer
+        imagePullPolicy: Always
+        resources:
+          limits:
+            memory: "16Mi"
+            cpu: "10m"
+
